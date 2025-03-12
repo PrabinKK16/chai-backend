@@ -12,8 +12,9 @@ export { asyncHandler };
 //   try {
 //     await fn(req, res, next);
 //   } catch (error) {
+//     console.error("Error: ", error);
 //     res.status(error.code || 500).json({
-//       success: false,
+//       success: true,
 //       message: error.message,
 //     });
 //   }
