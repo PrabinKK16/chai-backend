@@ -29,6 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const existedUser = User.findOne({
     $or: [{ userName }, { email }],
   });
+  
   if (existedUser) {
     throw new ApiError(409, "User with email or userName already existed");
   }
@@ -64,7 +65,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (!createdUser) {
     throw new ApiError(500, "Something went wrong while registering the user");
   }
-  
+
   return response
     .status(201)
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
