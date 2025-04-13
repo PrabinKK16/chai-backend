@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
    * remove password and refresh token field from response
    * check for user creation
    * return response
-   */
+  */
 
   const { userName, email, fullName, password } = req.body;
   console.log("userName: ", userName);
@@ -107,11 +107,11 @@ const loginUser = asyncHandler(async (req, res) => {
    * password check
    * access and refresh token
    * send cookie
-   */
+  */
 
   const { email, userName, password } = req.body;
 
-  if (!userName || !email) {
+  if (!userName && !email) {
     throw new ApiError(400, "UserName or email is required");
   }
 
@@ -133,7 +133,7 @@ const loginUser = asyncHandler(async (req, res) => {
     user._id
   );
 
-  const loggedInUser = await User.findById(user._id).selectedExclusively(
+  const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
 
